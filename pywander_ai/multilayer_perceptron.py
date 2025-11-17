@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from .general import NeuralNetwork
+from pywander_ai.general import NeuralNetwork
 
 
 class SimpleMLP(NeuralNetwork):
@@ -49,7 +49,7 @@ class SimpleMLP2(NeuralNetwork):
 
 if __name__ == '__main__':
     def train_simple_mlp():
-        from .datasets import MnistDataset
+        from pywander_ai.datasets import MnistDataset
 
         training_data = MnistDataset(train=True)
         from torch.utils.data import DataLoader
@@ -64,20 +64,20 @@ if __name__ == '__main__':
         for e in range(epochs):
             model.train_batch2(train_dataloader)
 
-        from .models import save_model, load_model
+        from pywander_ai.models import save_model, load_model
 
         model = save_model(model, 'mnist', 'simple_mlp.pkl')
 
 
     def test_simple_mlp():
-        from .datasets import MnistDataset
+        from pywander_ai.datasets import MnistDataset
 
         test_data = MnistDataset(train=False)
         from torch.utils.data import DataLoader
         batch_size = 16
         test_dataloader = DataLoader(test_data, batch_size=batch_size)
 
-        from .models import save_model, load_model
+        from pywander_ai.models import save_model, load_model
         model = load_model('mnist', 'simple_mlp.pkl')
 
         model.test_batch(test_dataloader)
@@ -87,7 +87,7 @@ if __name__ == '__main__':
     # test_simple_mlp()
 
     def train_simple_mlp2():
-        from .datasets import MnistDataset
+        from pywander_ai.datasets import MnistDataset
 
         training_data = MnistDataset(train=True)
         from torch.utils.data import DataLoader
@@ -102,24 +102,24 @@ if __name__ == '__main__':
         for e in range(epochs):
             model.train_batch(train_dataloader)
 
-        from .models import save_model, load_model
+        from pywander_ai.models import save_model, load_model
 
         model = save_model(model, 'mnist', 'simple_mlp2.pkl')
 
 
     def test_simple_mlp2():
-        from .datasets import MnistDataset
+        from pywander_ai.datasets import MnistDataset
 
         test_data = MnistDataset(train=False)
         from torch.utils.data import DataLoader
         batch_size = 32
         test_dataloader = DataLoader(test_data, batch_size=batch_size, shuffle=True)
 
-        from .models import save_model, load_model
+        from pywander_ai.models import save_model, load_model
         model = load_model('mnist', 'simple_mlp2.pkl')
 
         model.test_batch(test_dataloader)
 
 
-    # train_simple_mlp2()
+    train_simple_mlp2()
     test_simple_mlp2()
